@@ -55,6 +55,23 @@ No backend or database is used in v1.
 
 ---
 
+### Live Demo
+Open the application using the link below:
+
+https://kinshuk2405.github.io/ChipCheck/
+
+### How to Share
+- Copy the live link
+- Send it to friends via WhatsApp, Telegram, or any messaging app
+- Open the link in a mobile browser during the game
+
+### Usage Note
+At the moment, the app is intended to be used by one person to track the game.
+Each user opening the link gets a separate session.
+
+
+---
+
 ## Project Status
 
 - **Current Version:** v1 (MVP)
