@@ -19,10 +19,29 @@
 
     <!-- Background Ambience -->
     <div class="background-effects">
+        <!-- Suits -->
         <div class="suit s1">♠</div>
         <div class="suit s2">♥</div>
         <div class="suit s3">♣</div>
         <div class="suit s4">♦</div>
+        <div class="suit s5">♠</div>
+        <div class="suit s6">♥</div>
+        <div class="suit s7">♣</div>
+        <div class="suit s8">♦</div>
+
+        <!-- Phrases -->
+        <div class="phrase p1">ALL IN</div>
+        <div class="phrase p2">BLUFF</div>
+        <div class="phrase p3">ROYAL FLUSH</div>
+        <div class="phrase p4">FOLD</div>
+        <div class="phrase p5">THE NUTS</div>
+
+        <!-- Floating Cards -->
+        <div class="float-card fc1">A♠</div>
+        <div class="float-card fc2">K♥</div>
+        <div class="float-card fc3">Q♦</div>
+        <div class="float-card fc4">J♣</div>
+
         <!-- Chips -->
         <div class="chip c1"></div>
         <div class="chip c2"></div>
@@ -89,10 +108,14 @@
             <h3>Performance</h3>
             <div id="analyticsChart" class="chart-container"></div>
 
+            <h3>Settlements</h3>
+            <div id="settlementList" class="settlement-list"></div>
+
             <h3>Detailed Results</h3>
             <div id="summaryList" class="summary-list"></div>
 
             <div class="modal-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
+                <button class="cyber-btn" onclick="shareResults()">📤 Share</button>
                 <button class="cyber-btn" onclick="downloadSummary()">📸 Save Image</button>
                 <button class="cyber-btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2);"
                     onclick="closeSummary()">Close</button>
