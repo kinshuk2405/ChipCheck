@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChipCheck</title>
+    <!-- Google Fonts: Outfit and Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Ambience -->
+    <div class="background-effects">
+        <div class="suit s1">♠</div>
+        <div class="suit s2">♥</div>
+        <div class="suit s3">♣</div>
+        <div class="suit s4">♦</div>
+        <!-- Chips -->
+        <div class="chip c1"></div>
+        <div class="chip c2"></div>
+        <div class="chip c3"></div>
+        <div id="pokerQuote" class="poker-quote">"Trust everyone, but cut the cards."</div>
+    </div>
+
+    <main class="container">
+        <header class="game-header">
+            <div id="liveClock" class="session-info">--:--</div>
+            <h1 class="neon-title">ChipCheck</h1>
+            <p class="subtitle">Poker Night Tracker</p>
+        </header>
+
+        <section class="game-card">
+            <div class="input-group">
+                <input type="text" id="playerName" placeholder="PLAYER NAME" autocomplete="off">
+                <span class="focus-border"></span>
+            </div>
+            <div class="input-group">
+                <input type="number" id="buyInAmount" placeholder="BUY-IN AMOUNT" autocomplete="off">
+                <span class="focus-border"></span>
+            </div>
+            <button class="cyber-btn" onclick="addBuyIn()">
+                <span class="btn-content">Add Buy-In</span>
+                <span class="glitch-effect"></span>
+            </button>
+        </section>
+
+        <section class="stats-panel">
+            <h2>Total Pot</h2>
+            <div id="totalDisplay" class="total-amount">₹0</div>
+        </section>
+
+        <section class="player-roster">
+            <h3>Active Players</h3>
+            <div id="playerList" class="player-list"></div>
+        </section>
+
+        <button class="cyber-btn danger-btn" onclick="endSession()">End Session 🛑</button>
+        <button class="text-btn" onclick="toggleHistory()">📜 History</button>
+    </main>
+
+    <!-- Game Summary Modal -->
+    <div id="summaryModal" class="modal hidden">
+        <div id="summaryContent" class="modal-content">
+            <h2 class="neon-title">Game Over</h2>
+
+            <div class="awards">
+                <div class="award shark">
+                    <div class="emoji">🏆</div>
+                    <h3>Shark of the Night</h3>
+                    <div id="sharkName">-</div>
+                    <div id="sharkAmount" class="profit">₹0</div>
+                </div>
+                <div class="award atm">
+                    <div class="emoji">💀</div>
+                    <h3>ATM Machine</h3>
+                    <div id="atmName">-</div>
+                    <div id="atmAmount" class="loss">₹0</div>
+                </div>
+            </div>
+
+            <h3>Performance</h3>
+            <div id="analyticsChart" class="chart-container"></div>
+
+            <h3>Detailed Results</h3>
+            <div id="summaryList" class="summary-list"></div>
+
+            <div class="modal-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
+                <button class="cyber-btn" onclick="downloadSummary()">📸 Save Image</button>
+                <button class="cyber-btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2);"
+                    onclick="closeSummary()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Session History</h2>
+            <div id="historyList" class="history-list"></div>
+            <div class="modal-actions" style="margin-top: 1rem; display: flex; gap: 10px; justify-content: center;">
+                <button class="cyber-btn danger-btn" onclick="clearHistory()" style="margin-top:0;">🗑️ Clear</button>
+                <button class="cyber-btn" onclick="toggleHistory()" style="margin-top:0;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
