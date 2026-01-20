@@ -141,11 +141,11 @@ function endSession() {
 
     // Update Modal
     document.getElementById("sharkName").innerText = shark.amount !== -Infinity ? shark.name : "-";
-    document.getElementById("sharkAmount").innerText = shark.amount !== -Infinity ? (shark.amount >= 0 ? "+" : "") + "₹" + Math.round(shark.amount / 5) : "₹0";
+    document.getElementById("sharkAmount").innerText = shark.amount !== -Infinity ? (shark.amount >= 0 ? "+" : "") + "₹" + Math.round(shark.amount) : "₹0";
     document.getElementById("sharkAmount").className = "profit";
 
     document.getElementById("atmName").innerText = atm.amount !== Infinity ? atm.name : "-";
-    document.getElementById("atmAmount").innerText = atm.amount !== Infinity ? "₹" + Math.round(atm.amount / 5) : "₹0";
+    document.getElementById("atmAmount").innerText = atm.amount !== Infinity ? "₹" + Math.round(atm.amount) : "₹0";
     document.getElementById("atmAmount").className = "loss";
 
     // Perform Analytics (Bar Chart)
@@ -168,7 +168,7 @@ function endSession() {
                 <div class="stat-bar-container">
                     <div class="stat-bar-fill ${barClass}" style="width: ${width}%"></div>
                 </div>
-                <div class="stat-val ${valClass}">${isProfit ? '+' : ''}${Math.round(r.net / 5)}</div>
+                <div class="stat-val ${valClass}">${isProfit ? '+' : ''}${Math.round(r.net)}</div>
             </div>`;
     };
 
@@ -199,7 +199,7 @@ function endSession() {
         summaryHTML += `
             <div class="summary-item">
                 <span>${r.name}</span>
-                <span class="${r.net >= 0 ? 'profit' : 'loss'}">${r.net >= 0 ? '+' : ''}₹${Math.round(r.net / 5)}</span>
+                <span class="${r.net >= 0 ? 'profit' : 'loss'}">${r.net >= 0 ? '+' : ''}₹${Math.round(r.net)}</span>
             </div>
         `;
     });
@@ -235,7 +235,7 @@ function calculateSettlements(results) {
         let amount = Math.min(debt, credit);
 
         if (amount > 0) {
-            transactions.push(`<b>${debtors[i].name}</b> pays <b>${creditors[j].name}</b> ₹${Math.round(amount / 5)}`);
+            transactions.push(`<b>${debtors[i].name}</b> pays <b>${creditors[j].name}</b> ₹${Math.round(amount)}`);
         }
 
         debtors[i].net += amount;
