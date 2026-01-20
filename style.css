@@ -716,6 +716,18 @@ input::placeholder {
 .history-item {
     font-size: 0.9rem;
     color: var(--text-muted);
+    display: flex;
+    /* Ensure flex behavior */
+    justify-content: space-between;
+    transition: background 0.2s ease;
+    border-radius: 8px;
+    /* Slight roundness for hover */
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    /* Interactive feel */
+    color: white;
 }
 
 /* Mini Button for Top Up */
@@ -741,6 +753,19 @@ input::placeholder {
     background: var(--neon-cyan);
     color: black;
     box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.delete-btn {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    font-size: 1rem;
+}
+
+.delete-btn:hover {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 0 10px #ef4444;
 }
 
 /* Split Analytics Chart */
@@ -862,4 +887,23 @@ input::placeholder {
 .settlement-item b {
     color: white;
     font-weight: 600;
+}
+
+#pendingSettlements {
+    width: 100%;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+#pendingSettlements:focus {
+    border-color: var(--neon-cyan);
+    outline: none;
+    background: rgba(0, 0, 0, 0.5);
 }
