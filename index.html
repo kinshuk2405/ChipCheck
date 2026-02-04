@@ -59,10 +59,29 @@
             <div id="sessionConfigDisplay" style="color: var(--neon-cyan); font-size: 0.8rem; margin-top: 5px;"></div>
         </header>
 
-        <!-- Pre-Session Configuration -->
-        <section id="preSession" class="game-card">
+        <!-- Sticky Game Status Bar (Hidden by default) -->
+        <div id="stickyStatusBar" class="sticky-bar hidden">
+            <div class="sb-item">💰 Pot: <span id="sbPot">₹0</span></div>
+            <div class="sb-item">👤 Players: <span id="sbCount">0</span></div>
+            <div class="sb-item">⏱️ Time: <span id="sbTimer">00:00</span></div>
+        </div>
+
+        <!-- Setup Session Section -->
+        <section id="setupSection" class="game-card">
             <h2 class="neon-title" style="font-size: 2rem; margin-bottom: 20px;">
                 Setup Session</h2>
+
+            <div class="template-controls" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <select id="templateSelect"
+                    style="flex-grow: 1; padding: 10px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;">
+                    <option value=""> Load Preset </option>
+                </select>
+                <button id="saveTemplateBtn" class="cyber-btn"
+                    style="width: auto; margin:0; padding: 10px 15px; font-size: 0.9rem;">Save</button>
+                <button id="deleteTemplateBtn" class="cyber-btn danger-btn"
+                    style="width: auto; margin:0; padding: 10px 15px; font-size: 0.9rem;"
+                    title="Delete Selected Preset">Delete</button>
+            </div>
 
             <div class="input-group">
                 <label
@@ -99,7 +118,7 @@
             <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
                 <input type="checkbox" id="runningBalanceInput" style="width: 20px; height: 20px;">
                 <label for="runningBalanceInput" style="color: white; font-size: 0.95rem; cursor: pointer;">
-                    Cumulative Running Balance? (Tally with Past Sessions)
+                    Cumulative Running Balance ?
                 </label>
             </div>
 
@@ -107,14 +126,13 @@
                 <span class="btn-content">Start Poker Night</span>
                 <span class="glitch-effect"></span>
             </button>
+            <button class="text-btn" id="demoModeBtn"
+                style="margin-top: 29px; font-size: 0.9rem; color: var(--neon-cyan);">Run Demo Mode</button>
+        </section>
         </section>
 
-        <!-- Main Game Interface (Hidden Initially) -->
+        <!-- Main Game Interface (Hidden initially) -->
         <div id="gameInterface" class="hidden">
-            <!-- Header was here -->
-
-            <!-- Header removed/relocated in visual flow, but code remains for structure, now checking content match -->
-
             <section class="game-card">
                 <h2 class="neon-title" style="font-size: 2rem; margin-bottom: 20px;">Players</h2>
 
@@ -122,7 +140,6 @@
                     <input type="text" id="playerName" placeholder="PLAYER NAME" autocomplete="off">
                     <span class="focus-border"></span>
                 </div>
-                <!-- Buy-In Amount Input Removed -->
                 <button class="cyber-btn" onclick="addBuyIn()">
                     <span class="btn-content">Add Player / Buy-In</span>
                     <span class="glitch-effect"></span>
@@ -139,15 +156,17 @@
                 <div id="playerList" class="player-list"></div>
             </section>
 
-            <button class="cyber-btn danger-btn" onclick="endSession()">End Session 🛑</button>
-            <button class="text-btn" onclick="toggleHistory()">📜 Past Sessions</button>
+            <button class="cyber-btn danger-btn" onclick="endSession()">End Session</button>
+            <button class="text-btn" onclick="toggleHistory()">Past Sessions</button>
         </div>
     </main>
 
-    <!-- Game Summary Modal -->
+
+
+    <!-- Summary Modal -->
     <div id="summaryModal" class="modal hidden">
-        <div id="summaryContent" class="modal-content">
-            <h2 class="neon-title">Game Over</h2>
+        <div class="modal-content" id="summaryContent">
+            <h2 class="neon-title" style="margin-bottom: 1rem;">Game Over</h2>
 
             <div class="awards">
                 <div class="award shark">
@@ -164,23 +183,38 @@
                 </div>
             </div>
 
-            <h3>Performance</h3>
-            <div id="analyticsChart" class="chart-container"></div>
+            <div class="game-card" style="margin-top: 1rem; padding: 1rem;">
+                <h3>Performance</h3>
+                <div id="analyticsChart" class="chart-container"></div>
+            </div>
 
-            <h3>Settlements</h3>
-            <div id="settlementList" class="settlement-list"></div>
+            <div class="game-card" style="padding: 1rem;">
+                <h3>Settlements</h3>
+                <div id="settlementList" class="settlement-list"></div>
+            </div>
 
-            <h3>Detailed Results</h3>
-            <div id="summaryList" class="summary-list"></div>
+            <div class="game-card" style="padding: 1rem;">
+                <h3>Detailed Results</h3>
+                <div class="summary-header">
+                    <span>NAME</span>
+                    <span style="text-align:center;">BUY-INS</span>
+                    <span style="text-align:right;">P/L</span>
+                </div>
+                <div id="summaryList" class="summary-list"></div>
+            </div>
 
-            <h3>Pending Settlements</h3>
-            <textarea id="pendingSettlements" placeholder="Add custom notes here..." rows="4"></textarea>
+            <div class="game-card" style="padding: 1rem;">
+                <h3>Pending Settlements</h3>
+                <textarea id="pendingSettlements" placeholder="Add custom notes here..." rows="4"
+                    style="width:100%; background:rgba(0,0,0,0.3); color:white; border:1px solid rgba(255,255,255,0.1); padding:10px; border-radius:8px;"></textarea>
+            </div>
 
-            <div class="modal-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
+            <div id="summaryActions" class="modal-actions"
+                style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem; margin-bottom: 2rem;">
                 <button class="cyber-btn" onclick="shareResults()">📤 Share</button>
                 <button class="cyber-btn" onclick="downloadSummary()">📸 Save Image</button>
-                <button class="cyber-btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2);"
-                    onclick="closeSummary()">Close</button>
+                <button class="cyber-btn" onclick="restartApp()"
+                    style="background: transparent; border: 1px solid rgba(255,255,255,0.2);">New Session</button>
             </div>
         </div>
     </div>
@@ -197,8 +231,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
-
