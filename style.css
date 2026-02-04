@@ -555,7 +555,11 @@ input::placeholder {
     text-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
 }
 
-/* --- Modals & Overlays --- */
+/* Utility Class */
+.hidden {
+    display: none !important;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -569,26 +573,38 @@ input::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 1;
-    transition: opacity 0.3s ease;
 }
 
-.modal.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
+
 
 .modal-content {
-    background: #1e1e2e;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 20px;
     width: 90%;
     max-width: 500px;
     text-align: center;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+/* Summary Page Styling */
+#summaryPage {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 2rem;
+    animation: fadeInUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#summaryPage .game-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Awards Section */
@@ -635,6 +651,49 @@ input::placeholder {
 
 .summary-item:last-child {
     border-bottom: none;
+}
+
+.summary-header {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    padding: 10px 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 5px;
+}
+
+.summary-item {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.col-name {
+    font-weight: 600;
+    color: white;
+    text-align: left;
+}
+
+.col-buyins {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.col-net {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-align: right;
+    font-size: 1.1rem;
 }
 
 /* Analytics Chart */
@@ -701,7 +760,7 @@ input::placeholder {
 .text-btn {
     background: none;
     border: none;
-    color: var(--text-muted);
+    color: var(--neon-cyan);
     margin-top: 1rem;
     cursor: pointer;
     text-decoration: underline;
@@ -906,4 +965,54 @@ input::placeholder {
     border-color: var(--neon-cyan);
     outline: none;
     background: rgba(0, 0, 0, 0.5);
+}
+
+/* Sticky Header */
+.sticky-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 900;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Override utility hidden for animation if needed, but simple display toggle is fine too. 
+   Let's stick to display none for simplicity unless user demanded animation. 
+   User said "Sticky mini header... visible only during active game". 
+   Animation is nice. */
+
+.sticky-bar.bar-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Use this class instead of .hidden for the bar to animate */
+
+.sb-item {
+    color: white;
+    font-size: 0.9rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.sb-item span {
+    color: var(--neon-cyan);
+}
+
+/* Game Active Focus Mode */
+.game-active .background-effects {
+    opacity: 0.15 !important;
+}
+
+.background-effects {
+    transition: opacity 1s ease;
 }
